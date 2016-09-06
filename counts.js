@@ -26,14 +26,15 @@ module.exports = function Counts (Model) {
     if (!ctx.args || !ctx.args.filter) return [];
 
     var relations;
+    var filter;
 
     try{
-        var filter = JSON.parse(ctx.args.filter);
-        relations = filter && filter.counts;
+        filter = JSON.parse(ctx.args.filter);
     }catch(e){
-        var filter = qs.parse(ctx.args.filter);
-        relations = filter && filter.counts;
+        filter = qs.parse(ctx.args.filter);
     }
+
+    relations = filter && filter.counts;
 
     if (!Array.isArray(relations)) relations = [relations];
     return relations.filter(function (relation) {
