@@ -1,3 +1,5 @@
+var qs = require('qs');
+
 module.exports = function Counts (Model) {
   'use strict';
 
@@ -22,8 +24,18 @@ module.exports = function Counts (Model) {
 
   function extractRelationCounts (ctx) {
     if (!ctx.args || !ctx.args.filter) return [];
-    var filter = JSON.parse(ctx.args.filter);
-    var relations = filter && filter.counts;
+
+    var relations;
+    var filter;
+
+    try{
+        filter = JSON.parse(ctx.args.filter);
+    }catch(e){
+        filter = qs.parse(ctx.args.filter);
+    }
+
+    relations = filter && filter.counts;
+
     if (!Array.isArray(relations)) relations = [relations];
     return relations.filter(function (relation) {
       return Model.relations[relation] && Model.relations[relation].type.startsWith('has');
