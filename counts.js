@@ -22,7 +22,7 @@ module.exports = function Counts (Model) {
 
   function extractRelationCounts (ctx) {
     if (!ctx.args || !ctx.args.filter) return [];
-    var filter = JSON.parse(ctx.args.filter);
+    var filter = ctx.args.filter;
     var relations = filter && filter.counts;
     if (!Array.isArray(relations)) relations = [relations];
     return relations.filter(function (relation) {
