@@ -1,6 +1,6 @@
 {
   "name": "loopback-counts-mixin",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A mixin to enable get count of related models for a loopback Model.",
   "main": "index.js",
   "scripts": {
