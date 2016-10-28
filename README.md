@@ -1,6 +1,12 @@
 # loopback-counts-mixin
 A mixin to enable get count of related models for a loopback Model.
 
+## SOLVED issues:
+```
+- Error in startWith in Prod mode
+- Not found Promise
+```
+
 ## INSTALL
 
 ```
