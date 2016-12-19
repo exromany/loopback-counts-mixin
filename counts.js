@@ -6,8 +6,10 @@ module.exports = function Counts (Model) {
   Model.afterRemote('find', injectCounts);
 
   function injectCounts (ctx, unused, next) {
-    var relations = extractRelationCounts(ctx);
     var resources = ctx.result;
+    if (resources == null) return next();
+    
+    var relations = extractRelationCounts(ctx);
     if (!Array.isArray(resources)) resources = [resources];
     if (!relations.length || !resources.length) {
       return next();
