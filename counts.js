@@ -1,6 +1,6 @@
 module.exports = function Counts (Model) {
   'use strict';
-
+  var Promise = require('es6-promise').Promise;
   Model.afterRemote('findById', injectCounts);
   Model.afterRemote('findOne', injectCounts);
   Model.afterRemote('find', injectCounts);
@@ -33,7 +33,7 @@ module.exports = function Counts (Model) {
     var relations = filter && filter.counts;
     if (!Array.isArray(relations)) relations = [relations];
     return relations.filter(function (relation) {
-      return Model.relations[relation] && Model.relations[relation].type.startsWith('has');
+      return Model.relations[relation] && (Model.relations[relation].type.indexOf('has') === 0);
     });
   }
 
